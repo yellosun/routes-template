@@ -1,28 +1,32 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {Component, Fragment} from 'react'
+import {BrowserRouter as Router, Route } from 'react-router-dom'
+import Navbar from './components/Navbar'
+import Portfolio from './components/Portfolio'
+import Hire from './components/Hire'
+import Project from './components/Project'
+import projects from './db.json'
+
+
+const Home = () => <h1>Home</h1>
+const About = () => <h1>About</h1>
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+    render() {
+        return (
+            <Router>
+                <Fragment>
+                    <Navbar />
+                    <Route exact path='/' render={ Home }>Home</Route>
+                    <Route path='/about' render={ About }>About</Route>
+                    <Route path='/hire-me' component={ Hire }>Hire Me</Route>
+                    <Route exact path='/portfolio' render={ routerProps => {
+                        return  <Portfolio {...routerProps} projects={projects} /> }
+                    }>Portfolio</Route>
+                    <Route path={`/portfolio/:id`} render={ routerProps=> <Project {...routerProps} projects={projects} /> } />
+                </Fragment>
+            </Router>
+        )
+    }
 }
 
-export default App;
+export default App
