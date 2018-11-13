@@ -1,5 +1,6 @@
 import React, {Component, Fragment} from 'react'
 import {BrowserRouter as Router, Route } from 'react-router-dom'
+
 import Navbar from './components/Navbar'
 import Portfolio from './components/Portfolio'
 import Hire from './components/Hire'
@@ -10,7 +11,7 @@ import projects from './db.json'
 const Home = () => <h1>Home</h1>
 const About = () => <h1>About</h1>
 
-class App extends Component {
+export default class App extends Component {
     render() {
         return (
             <Router>
@@ -28,5 +29,3 @@ class App extends Component {
         )
     }
 }
-
-export default App
